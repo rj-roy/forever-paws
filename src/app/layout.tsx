@@ -4,6 +4,7 @@ import "./globals.css";
 import ThemeProviderComponent from "@/providers/ThemeProviderComponent"
 import Navbar from "@/components/shared/NavBar";
 import { ToastContainer } from "react-toastify";
+import MobileNav from "@/components/shared/MobileNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
           <Navbar />
           <main>
             {children}
+            <MobileNav/>
           </main>
         </ThemeProviderComponent>
       </body>
