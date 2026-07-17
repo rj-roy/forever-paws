@@ -1,5 +1,6 @@
 export interface Pet {
-  userId: string;
+  _id: string;
+  userId?: string;
   name: string;
   species: string;
   breed: string;
@@ -13,12 +14,13 @@ export interface Pet {
   adoptionFee: number;
   city: string;
   images: string[];
-  status: 'available' | 'pending' | 'adopted';
+  status: 'available' | 'pending-adoption' | 'adopted';
 };
 
 // types/pet.ts - Add these types
 export interface Pet {
-  userId: string;
+  _id: string;
+  userId?: string;
   name: string;
   species: string;
   breed: string;
@@ -38,7 +40,7 @@ export interface Pet {
   city: string;
   state: string;
   images: string[];
-  status: 'available' | 'pending' | 'adopted';
+  status: 'available' | 'pending-adoption' | 'adopted';
   postedDate: string;
   shelter?: {
     name: string;

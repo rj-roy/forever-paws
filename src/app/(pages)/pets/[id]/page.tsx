@@ -177,8 +177,7 @@ export default async function PetPage({ params }: PetPageProps) {
                             fee={pet.adoptionFee}
                             views={pet.views}
                             applications={pet.applications}
-                            petId={pet.userId}
-                        />
+                            petId={pet._id} petName={''}                        />
                     </div>
                 </div>
             </div>

@@ -1,4 +1,3 @@
-// components/PetCard.tsx
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Heart } from 'lucide-react';
@@ -24,7 +23,7 @@ export default function PetCard({ pet }: PetCardProps) {
                 {/* Available Badge */}
                 <div className="absolute top-4 left-4">
                     <span className="px-3 py-1.5 bg-secondary/90 dark:bg-secondary text-white text-xs font-semibold rounded-full shadow-sm">
-                        AVAILABLE
+                        {pet.status.toUpperCase().replace('-', ' ')}
                     </span>
                 </div>
 
@@ -49,11 +48,17 @@ export default function PetCard({ pet }: PetCardProps) {
                 </div>
 
                 <Link
-                    href={`/pets/${pet.userId}`}
-                    className="block w-full py-3 px-4 bg-primary hover:bg-primary/90 dark:bg-primary dark:hover:bg-primary/80 text-white text-center rounded-full font-medium transition-all duration-200 hover:shadow-lg active:scale-95"
+                    href={pet.status === "adopted" ? "#" : `/pets/${pet._id}`}
+                    aria-disabled={pet.status === "adopted"}
+                    tabIndex={pet.status === "adopted" ? -1 : 0}
+                    className={`block w-full py-3 px-4 rounded-full font-medium text-center transition-all duration-200 ${pet.status === "adopted" || pet.status === "pending-adoption"
+                            ? "bg-gray-400 text-white cursor-not-allowed pointer-events-none"
+                            : "bg-primary hover:bg-primary/90 dark:bg-primary dark:hover:bg-primary/80 text-white hover:shadow-lg active:scale-95"
+                        }`}
                 >
-                    Meet {pet.name}
+                    {pet.status === "adopted" ? "Adopted" : pet.status === "pending-adoption" ? "PENDING" : `Meet ${pet.name}`}
                 </Link>
+
             </div>
         </div>
     );

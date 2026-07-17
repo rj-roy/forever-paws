@@ -28,6 +28,7 @@ async function getPets(searchParams: Record<string, string | string[] | undefine
       }
     }
   });
+  
 
   const apiUrl = `${'http://localhost:5000'}/api/v1/pets/get/query?${queryString.toString()}`;
   
