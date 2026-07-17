@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { Grid2X2, User2 } from 'lucide-react';
 
 const navLinks = [
-    { name: 'Find a Pet', href: '/find' },
+    { name: 'Find a Pet', href: '/pets' },
     { name: 'How It Works', href: '/how-it-works' },
     { name: 'About', href: '/about' },
 ];
