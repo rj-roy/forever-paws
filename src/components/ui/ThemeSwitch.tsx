@@ -19,7 +19,7 @@ export default function ThemeSwitch() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="flex items-center justify-center w-11 h-11 rounded-full border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-all duration-300 hover:scale-105"
+      className="flex items-center justify-center md:w-11 md:h-11 w-8 h-8 rounded-full border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-all duration-300 hover:scale-105"
     >
       {isDark ? (
         <Moon className="size-5 text-cyan-400" />
