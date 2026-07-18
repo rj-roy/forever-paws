@@ -10,6 +10,7 @@ const navLinks = [
     { name: 'Find a Pet', href: '/pets' },
     { name: 'How It Works', href: '/how-it-works' },
     { name: 'About', href: '/about' },
+    {name: 'Contact', href: '/contact'},
 ];
 
 export default function Navbar() {

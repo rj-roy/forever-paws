@@ -1,4 +1,3 @@
-// components/FilterButton.tsx
 'use client';
 
 import { useState } from 'react';
@@ -12,10 +11,10 @@ export default function FilterButton() {
     const router = useRouter();
 
     const speciesOptions = [
-        { id: 'dogs', label: 'Dogs' },
-        { id: 'cats', label: 'Cats' },
-        { id: 'small-pets', label: 'Small Pets' },
-        { id: 'birds', label: 'Birds' },
+        { id: 'dog', label: 'Dogs' },
+        { id: 'cat', label: 'Cats' },
+        { id: 'small-pet', label: 'Small Pets' },
+        { id: 'bird', label: 'Birds' },
     ];
 
     const ageOptions = ['Puppy', 'Young', 'Adult', 'Senior'];
@@ -50,7 +49,7 @@ export default function FilterButton() {
             {/* Floating Button */}
             <button
                 onClick={() => setIsOpen(true)}
-                className="lg:hidden fixed bottom-24 right-4 z-30 flex items-center gap-2 py-3 px-5 bg-primary text-white rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95"
+                className="lg:hidden fixed bottom-18 right-4 z-30 flex items-center gap-2 py-3 px-5 bg-primary text-white rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95"
             >
                 <Filter size={18} />
                 Filters
@@ -65,7 +64,7 @@ export default function FilterButton() {
             )}
 
             {/* Mobile Filter Modal */}
-            <div className={`fixed inset-x-0 bottom-0 z-50 lg:hidden bg-white dark:bg-def-dark-bg rounded-t-3xl transform transition-transform duration-300 ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}>
+            <div className={`fixed inset-x-0 bottom-15 z-50 lg:hidden bg-white dark:bg-def-dark-bg rounded-t-3xl transform transition-transform duration-300 ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}>
                 <div className="p-6 max-h-[80vh] overflow-y-auto">
                     <div className="flex items-center justify-between mb-6">
                         <h2 className="text-xl font-semibold text-gray-900 dark:text-white font-poppins">
