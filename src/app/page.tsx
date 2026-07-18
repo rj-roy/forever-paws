@@ -106,7 +106,7 @@ export default function HomePage() {
             <div className="relative hidden lg:block">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://loremflickr.com/600/450/dog?lock=20"
+                  src="https://loremflickr.com/600/450/cat?lock=1433"
                   alt="Happy family with their adopted dog"
                   width={600}
                   height={500}
@@ -339,7 +339,7 @@ export default function HomePage() {
             <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
               We&apos;ll send you a weekly update of the newest arrivals matching your preferences.
             </p>
-            <div className="flex gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <input
                 type="email"
                 placeholder="Enter your email"

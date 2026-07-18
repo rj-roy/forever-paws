@@ -161,7 +161,15 @@ export default function ListAPetModal({
 
             // Add all form fields
             Object.entries(formData).forEach(([key, value]) => {
-                if (Array.isArray(value)) {
+                if (key === 'ageUnit') return; // skip — age is converted below
+                if (key === 'age') {
+                    const ageInMonths = formData.ageUnit === 'years'
+                        ? Number(formData.age) * 12
+                        : Number(formData.age);
+                    submitData.append('age', String(ageInMonths));
+                } else if (key === 'adoptionFee') {
+                    submitData.append('adoptionFee', String(Number(formData.adoptionFee)));
+                } else if (Array.isArray(value)) {
                     submitData.append(key, JSON.stringify(value));
                 } else {
                     submitData.append(key, String(value));
@@ -173,14 +181,15 @@ export default function ListAPetModal({
                 submitData.append('images', image);
             });
 
-            const response = await fetch('/api/v1/pets/create', {
+            const response = await fetch('http://localhost:5000/api/v1/pets/create', {
                 method: 'POST',
+                credentials: 'include',
                 body: submitData,
             });
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.message || 'Failed to list pet');
+                throw new Error(errorData.error || errorData.message || 'Failed to list pet');
             }
 
             toast.success('Pet listed successfully!');
@@ -220,6 +229,7 @@ export default function ListAPetModal({
 
         } catch (error) {
             console.error('Error listing pet:', error);
+            toast.error(error instanceof Error ? error.message : 'Failed to list pet. Please try again.');
         } finally {
             setIsSubmitting(false);
         }
