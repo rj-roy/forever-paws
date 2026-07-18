@@ -41,6 +41,18 @@ export const auth = betterAuth({
                 required: false,
                 defaultValue: "Not Provided",
             },
+
+            city: {
+                type: "string",
+                required: false,
+                defaultValue: "",
+            },
+
+            state: {
+                type: "string",
+                required: false,
+                defaultValue: "",
+            },
         },
     },
 });
