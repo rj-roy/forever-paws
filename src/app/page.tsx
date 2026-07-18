@@ -5,10 +5,10 @@ import { Search, MapPin, Heart, ChevronRight, Star, Mail, Users, Building2, MapP
 
 export default function HomePage() {
   const featuredPets = [
-    { id: 1, name: 'Buddy', breed: 'Beagle', age: '2 Years', image: 'https://loremflickr.com/600/450/dog?lock=130', status: 'Available' },
-    { id: 2, name: 'Luna', breed: 'Shorthair', age: '4 Years', image: 'https://loremflickr.com/600/450/dog?lock=40', status: 'Available' },
-    { id: 3, name: 'Snowy', breed: 'Lop Rabbit', age: '1 Year', image: 'https://loremflickr.com/600/450/cat?lock=102', status: 'Available' },
-    { id: 4, name: 'Max', breed: 'Husky', age: '3 Years', image: 'https://loremflickr.com/600/450/dog?lock=121', status: 'Available' },
+    { id: 1, name: 'Buddy', breed: 'Beagle', age: '2 Years', image: 'https://res.cloudinary.com/dbkpia8ri/image/upload/v1784397663/forever-paws/pets/duke-3-2.jpg', status: 'Available' },
+    { id: 2, name: 'Luna', breed: 'Shorthair', age: '4 Years', image: 'https://res.cloudinary.com/dbkpia8ri/image/upload/v1784397660/forever-paws/pets/zara-3-2.jpg', status: 'Available' },
+    { id: 3, name: 'Snowy', breed: 'Lop Rabbit', age: '1 Year', image: 'https://res.cloudinary.com/dbkpia8ri/image/upload/v1784397645/forever-paws/pets/ginger-4-3.jpg', status: 'Available' },
+    { id: 4, name: 'Max', breed: 'Husky', age: '3 Years', image: 'https://res.cloudinary.com/dbkpia8ri/image/upload/v1784397632/forever-paws/pets/duke-1.jpg', status: 'Available' },
   ];
 
   const categories = [
@@ -106,7 +106,7 @@ export default function HomePage() {
             <div className="relative hidden lg:block">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://loremflickr.com/600/450/cat?lock=1433"
+                  src="https://res.cloudinary.com/dbkpia8ri/image/upload/v1784393610/forever-paws/pets/pip-1.jpg"
                   alt="Happy family with their adopted dog"
                   width={600}
                   height={500}
