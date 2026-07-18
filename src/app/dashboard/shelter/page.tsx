@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 async function getPets(shelterId: string, page: number = 1): Promise<{ pets: Pet[]; total: number }> {
     try {
-        const res = await fetch(`http://localhost:5000/api/v1/pets/get/mine?shelterId=${shelterId}&page=${page}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/pets/get/mine?shelterId=${shelterId}&page=${page}`, {
             cache: 'no-store',
         });
 

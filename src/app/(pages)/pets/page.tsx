@@ -30,7 +30,7 @@ async function getPets(searchParams: Record<string, string | string[] | undefine
   });
   
 
-  const apiUrl = `${'http://localhost:5000'}/api/v1/pets/get/query?${queryString.toString()}`;
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/pets/get/query?${queryString.toString()}`;
   
   const res = await fetch(apiUrl, {
     cache: 'no-store',

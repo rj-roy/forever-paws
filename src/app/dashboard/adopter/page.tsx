@@ -18,7 +18,7 @@ import { getUserSession } from '@/lib/core/session';
 async function getAdopterApplications(userId: string): Promise<AdopterApplication[]> {
     try {
         const res = await fetch(
-            `http://localhost:5000/api/v1/adoption/get?applicantId=${userId}`,
+            `${process.env.NEXT_PUBLIC_API_URL}/api/v1/adoption/get?applicantId=${userId}`,
             { cache: 'no-store' }
         );
 

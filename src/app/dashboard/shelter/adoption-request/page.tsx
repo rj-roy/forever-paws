@@ -9,7 +9,7 @@ async function getApplications(shelterId: string, filter: string = 'all'): Promi
     try {
         const query = filter !== 'all' ? `&status=${filter}` : '';
         const res = await fetch(
-            `http://localhost:5000/api/v1/adoption/get?shelterId=${shelterId}${query}`,
+            `${process.env.NEXT_PUBLIC_API_URL}/api/v1/adoption/get?shelterId=${shelterId}${query}`,
             { cache: 'no-store' }
         );
 

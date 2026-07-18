@@ -15,7 +15,7 @@ interface PetPageProps {
 }
 
 async function getPet(id: string): Promise<Pet> {
-    const res = await fetch(`${'http://localhost:5000'}/api/v1/pets/get/id/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/pets/get/id/${id}`, {
         cache: 'no-store',
     });
 
@@ -28,7 +28,7 @@ async function getPet(id: string): Promise<Pet> {
 
 async function getRelatedPets(breed: string, limit: number = 3): Promise<RelatedPet[]> {
     const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/pets/get/query?breed=${breed}&limit=${limit}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/pets/get/query?breed=${breed}&limit=${limit}`,
         { cache: 'no-store' }
     );
 
