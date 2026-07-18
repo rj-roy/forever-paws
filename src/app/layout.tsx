@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProviderComponent from "@/providers/ThemeProviderComponent"
 import Navbar from "@/components/shared/NavBar";
+import Footer from "@/components/shared/Footer";
 import { ToastContainer } from "react-toastify";
 import MobileNav from "@/components/shared/MobileNav";
 
@@ -40,6 +41,7 @@ export default function RootLayout({
             {children}
             <MobileNav/>
           </main>
+          <Footer />
         </ThemeProviderComponent>
       </body>
     </html>
