@@ -5,9 +5,9 @@ import { Plus, CheckCircle, Clock, FileText, Heart, PawPrint, Shield, MessageCir
 import Image from 'next/image';
 import Link from 'next/link';
 
-async function getPets(shelterId: string): Promise<{ pets: Pet[]; total: number }> {
+async function getPets(shelterId: string, page: number = 1): Promise<{ pets: Pet[]; total: number }> {
     try {
-        const res = await fetch(`http://localhost:5000/api/v1/pets/get/mine?shelterId=${shelterId}`, {
+        const res = await fetch(`http://localhost:5000/api/v1/pets/get/mine?shelterId=${shelterId}&page=${page}`, {
             cache: 'no-store',
         });
 
@@ -39,7 +39,7 @@ export default async function ManagePetsPage({ searchParams }: ManagePetsPagePro
     const session = await getUserSession();
     const userId = session?.user?.id || '';
 
-    const { pets, total } = await getPets(userId);
+    const { pets, total } = await getPets(userId, currentPage);
 
     if (pets.length === 0) {
         return (
