@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import Image from 'next/image';
 import { Calendar, Mail, Heart, FileText, Shield } from 'lucide-react';
 import ProfileForm from '@/components/dashboard/profile/ProfileForm';
+import ChangePasswordForm from '@/components/dashboard/profile/ChangePasswordForm';
 import { getUserSession } from '@/lib/core/session';
 
 export default async function ProfilePage() {
@@ -19,7 +20,7 @@ export default async function ProfilePage() {
 
     return (
         <div className="min-h-screen bg-[#FFF9F2] dark:bg-def-dark-bg pb-20">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-1">
+            <div className="max-w-6xl mx-auto sm:px-6 lg:px-8 py-8 lg:py-1">
 
                 {/* Page Header */}
                 <div className="mb-8">
@@ -133,7 +134,7 @@ export default async function ProfilePage() {
                             </Suspense>
                         </div>
 
-                        {/* Password Change Section (Optional but recommended) */}
+                        {/* Password Change Section */}
                         <div className="mt-6 bg-white dark:bg-def-dark-bg rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-800">
                             <h3 className="text-xl font-bold font-poppins text-gray-900 dark:text-white mb-2">
                                 Password & Security
@@ -141,9 +142,7 @@ export default async function ProfilePage() {
                             <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
                                 Change your password to keep your account secure.
                             </p>
-                            <button className="px-6 py-2.5 border-2 border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-primary text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary rounded-full font-medium transition-all duration-200">
-                                Change Password
-                            </button>
+                            <ChangePasswordForm />
                         </div>
                     </div>
 
