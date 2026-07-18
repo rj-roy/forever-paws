@@ -2,8 +2,10 @@
 import { authClient } from '@/lib/auth-client';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { Home, PawPrint } from 'lucide-react';
+import { getPostAuthRedirect } from '@/lib/actions/getPostAuthRedirect';
 
 type Props = {
     isLogin: boolean;
@@ -37,7 +39,14 @@ export default function AuthForm({ isLogin }: Props) {
 
     const router = useRouter();
     const searchParams = useSearchParams();
-    const redirectTo = searchParams.get('redirect') || '/dashboard/profile';
+    const redirectTo = searchParams.get('redirect');
+    const [defaultRedirect, setDefaultRedirect] = useState('/dashboard/profile');
+
+    useEffect(() => {
+        getPostAuthRedirect().then(setDefaultRedirect);
+    }, []);
+
+    const targetRedirect = redirectTo || defaultRedirect;
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
@@ -90,21 +99,23 @@ export default function AuthForm({ isLogin }: Props) {
                     return;
                 } else if (data) {
                     await new Promise(resolve => setTimeout(resolve, 1500));
-                    router.push(redirectTo);
+                    router.push(targetRedirect);
                 };
             } else {
                 const { data, error } = await authClient.signUp.email({
                     name: formData.name || '',
                     email: formData.email,
                     password: formData.password,
-                });
+                    role: formData.role || 'adopter',
+                    profileImage: formData.profileImage || '',
+                } as Parameters<typeof authClient.signUp.email>[0]);
 
                 if (error) {
                     toast.error(error.message);
                     return;
                 } else if (data) {
                     await new Promise(resolve => setTimeout(resolve, 1500));
-                    router.push(redirectTo);
+                    router.push(targetRedirect);
                 };
             };
 
@@ -116,8 +127,8 @@ export default function AuthForm({ isLogin }: Props) {
     };
 
     const getInputClasses = (fieldName: string) => {
-        const baseClasses = "w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-900 focus:border-transparent transition bg-white text-stone-900 placeholder-stone-400";
-        const errorClasses = errors[fieldName] ? "border-red-500 focus:ring-red-500" : "border-stone-300";
+        const baseClasses = "w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-900 focus:border-transparent transition bg-white dark:bg-stone-800 text-stone-900 dark:text-white placeholder-stone-400 dark:placeholder-stone-500";
+        const errorClasses = errors[fieldName] ? "border-red-500 focus:ring-red-500" : "border-stone-300 dark:border-stone-600";
         return `${baseClasses} ${errorClasses}`;
     };
 
@@ -138,6 +149,50 @@ export default function AuthForm({ isLogin }: Props) {
                         className={getInputClasses('name')}
                     />
                     {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+                </div>
+            )}
+
+            {!isLogin && (
+                <div>
+                    <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1.5">
+                        I want to join as
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                        <button
+                            type="button"
+                            onClick={() => setFormData(prev => ({ ...prev, role: 'adopter' }))}
+                            className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all duration-200 ${
+                                formData.role === 'adopter'
+                                    ? 'border-stone-900 bg-stone-900 text-white'
+                                    : 'border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:border-stone-400 dark:hover:border-stone-500'
+                            }`}
+                        >
+                            <PawPrint size={20} />
+                            <div className="text-left">
+                                <p className="font-semibold text-sm">Adopter</p>
+                                <p className={`text-xs ${formData.role === 'adopter' ? 'text-stone-300' : 'text-stone-500 dark:text-stone-400'}`}>
+                                    Find a pet
+                                </p>
+                            </div>
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setFormData(prev => ({ ...prev, role: 'shelter' }))}
+                            className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all duration-200 ${
+                                formData.role === 'shelter'
+                                    ? 'border-stone-900 bg-stone-900 text-white'
+                                    : 'border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:border-stone-400 dark:hover:border-stone-500'
+                            }`}
+                        >
+                            <Home size={20} />
+                            <div className="text-left">
+                                <p className="font-semibold text-sm">Shelter</p>
+                                <p className={`text-xs ${formData.role === 'shelter' ? 'text-stone-300' : 'text-stone-500 dark:text-stone-400'}`}>
+                                    List pets
+                                </p>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             )}
 
@@ -194,7 +249,7 @@ export default function AuthForm({ isLogin }: Props) {
 
             {/* Global Submit Error */}
             {errors.submit && (
-                <div className="rounded-md bg-red-50 p-4 border border-red-200">
+                <div className="rounded-md bg-red-50 dark:bg-red-900/20 p-4 border border-red-200 dark:border-red-800">
                     <div className="flex">
                         <div className="shrink-0">
                             <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
@@ -202,7 +257,7 @@ export default function AuthForm({ isLogin }: Props) {
                             </svg>
                         </div>
                         <div className="ml-3">
-                            <h3 className="text-sm font-medium text-red-800">{errors.submit}</h3>
+                            <h3 className="text-sm font-medium text-red-800 dark:text-red-300">{errors.submit}</h3>
                         </div>
                     </div>
                 </div>
@@ -211,7 +266,7 @@ export default function AuthForm({ isLogin }: Props) {
             <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-stone-900 text-white py-3 rounded-lg font-medium hover:bg-stone-800 transition-colors shadow-md mt-6 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                className="w-full bg-stone-900 dark:bg-white dark:text-stone-900 text-white py-3 rounded-lg font-medium hover:bg-stone-800 dark:hover:bg-stone-200 transition-colors shadow-md mt-6 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
                 {isLoading ? (
                     <span className="flex items-center gap-2">

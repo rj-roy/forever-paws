@@ -104,17 +104,17 @@ export default async function PetPage({ params }: PetPageProps) {
                             images={pet.images}
                             petName={pet.name}
                             status={pet.status}
-                            location={`${pet.city}, ${pet.state}`}
-                            postedDate={pet.postedDate}
+                            location={`${pet.city}, ${pet.state ?? ''}`}
+                            postedDate={pet.postedDate ?? ''}
                         />
 
                         <QuickInfoBar
                             breed={pet.breed}
                             age={pet.age}
-                            ageUnit={pet.ageUnit}
+                            ageUnit={pet.ageUnit ?? ''}
                             size={pet.size}
-                            weight={pet.weight}
-                            gender={pet.gender}
+                            weight={pet.weight?.toString()}
+                            gender={pet.gender ?? ''}
                         />
 
                         {/* About Section */}
@@ -138,8 +138,8 @@ export default async function PetPage({ params }: PetPageProps) {
                             <HealthBadges
                                 vaccinated={pet.vaccinated}
                                 spayedNeutered={pet.spayedNeutered}
-                                microchipped={pet.microchipped}
-                                healthCertificate={pet.healthCertificate}
+                                microchipped={pet.microchipped ?? false}
+                                healthCertificate={pet.healthCertificate ?? false}
                             />
                         </div>
 
@@ -154,13 +154,13 @@ export default async function PetPage({ params }: PetPageProps) {
                         )}
 
                         {/* Shelter Info */}
-                        {pet.shelter && (
+                        {(pet.shelterName || pet.contactEmail) && (
                             <div>
                                 <ShelterCard
-                                    name={pet.shelter.name}
-                                    rating={pet.shelter.rating}
-                                    reviewCount={pet.shelter.reviewCount}
-                                    contactEmail={pet.shelter.contactEmail}
+                                    name={pet.shelterName ?? 'Unknown Shelter'}
+                                    rating={pet.avgRating ?? 0}
+                                    reviewCount={pet.reviewCount ?? 0}
+                                    contactEmail={pet.contactEmail}
                                 />
                             </div>
                         )}

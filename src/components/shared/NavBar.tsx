@@ -5,6 +5,7 @@ import ThemeSwitch from '../ui/ThemeSwitch';
 import { authClient } from '@/lib/auth-client';
 import Image from 'next/image';
 import { Grid2X2, User2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const navLinks = [
     { name: 'Find a Pet', href: '/pets' },
@@ -18,7 +19,14 @@ export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false)
     const { data: session } = authClient.useSession();
+    const router = useRouter();
     console.log(session);
+
+    const handleSignout = async () => {
+        await authClient.signOut();
+        setUserMenuOpen(false);
+        router.push('/auth?signin=true');
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -194,7 +202,7 @@ export default function Navbar() {
                         <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
 
                         <button
-                            // onClick={handleLogout}
+                            onClick={handleSignout}
                             className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                         >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
