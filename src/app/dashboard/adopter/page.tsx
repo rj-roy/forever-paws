@@ -197,7 +197,7 @@ export default async function MyApplicationsPage() {
                                 Visit Help Center
                             </Link>
                             <Link
-                                href="/contact"
+                                href="/chat"
                                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full transition-all duration-200"
                             >
                                 <MessageCircle size={18} />

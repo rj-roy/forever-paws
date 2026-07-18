@@ -6,6 +6,7 @@ import Navbar from "@/components/shared/NavBar";
 import Footer from "@/components/shared/Footer";
 import { ToastContainer } from "react-toastify";
 import MobileNav from "@/components/shared/MobileNav";
+import ChatWidgetGate from "@/components/shared/ChatWidgetGate";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +43,7 @@ export default function RootLayout({
             <MobileNav/>
           </main>
           <Footer />
+          <ChatWidgetGate />
         </ThemeProviderComponent>
       </body>
     </html>

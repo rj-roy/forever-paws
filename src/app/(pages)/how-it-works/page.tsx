@@ -310,8 +310,8 @@ export default function HowItWorksPage() {
                             <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                                 Our team is here to guide you through every step of the process.
                             </p>
-                            <Link href="/contact" className="text-[#3B7A99] hover:text-[#3B7A99]/80 font-medium text-sm">
-                                Contact Support →
+                            <Link href="/chat" className="text-[#3B7A99] hover:text-[#3B7A99]/80 font-medium text-sm">
+                                Chat with Us →
                             </Link>
                         </div>
 

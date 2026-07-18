@@ -20,7 +20,6 @@ export default function Navbar() {
     const [userMenuOpen, setUserMenuOpen] = useState(false)
     const { data: session } = authClient.useSession();
     const router = useRouter();
-    console.log(session);
 
     const handleSignout = async () => {
         await authClient.signOut();
