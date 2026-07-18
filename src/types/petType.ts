@@ -1,55 +1,37 @@
 export interface Pet {
   _id: string;
-  userId?: string;
+  shelterId?: string;
   name: string;
   species: string;
   breed: string;
   age: number;
+  ageUnit?: string;
   size: string;
+  weight?: number;
+  gender?: string;
   shortDescription: string;
   fullDescription: string;
   temperamentTags: string[];
   vaccinated: boolean;
   spayedNeutered: boolean;
+  microchipped?: boolean;
+  healthCertificate?: boolean;
+  healthNotes?: string;
   adoptionFee: number;
   city: string;
+  state?: string;
+  shelterName?: string;
+  contactEmail?: string;
+  contactPhone?: string;
   images: string[];
-  status: 'available' | 'pending-adoption' | 'adopted';
-};
-
-// types/pet.ts - Add these types
-export interface Pet {
-  _id: string;
-  userId?: string;
-  name: string;
-  species: string;
-  breed: string;
-  age: number;
-  ageUnit: string;
-  size: string;
-  weight?: string;
-  gender: string;
-  shortDescription: string;
-  fullDescription: string;
-  temperamentTags: string[];
-  vaccinated: boolean;
-  spayedNeutered: boolean;
-  microchipped: boolean;
-  healthCertificate: boolean;
-  adoptionFee: number;
-  city: string;
-  state: string;
-  images: string[];
-  status: 'available' | 'pending-adoption' | 'adopted';
-  postedDate: string;
-  shelter?: {
-    name: string;
-    rating: number;
-    reviewCount: number;
-    contactEmail: string;
-  };
-  views?: number;
+  status: 'available' | 'pending-adoption' | 'adopted' | 'pending-approval' | 'rejected';
+  avgRating?: number;
+  reviewCount?: number;
   applications?: number;
+  views?: number;
+  postedDate?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface RelatedPet {
@@ -57,9 +39,9 @@ export interface RelatedPet {
   name: string;
   breed: string;
   age: number;
-  ageUnit: string;
+  ageUnit?: string;
   adoptionFee: number;
   city: string;
-  state: string;
+  state?: string;
   images: string[];
 }

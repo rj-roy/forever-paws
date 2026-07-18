@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { useSession } from '@/lib/auth-client';
 import ListPetForm from './ListPetForm';
 
 interface ListPetModalProps {
@@ -17,6 +18,7 @@ export default function ListAPetModal({
     onClose,
     onSuccess
 }: ListPetModalProps) {
+    const { data: session } = useSession();
     const [currentStep, setCurrentStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [images, setImages] = useState<File[]>([]);
@@ -175,6 +177,11 @@ export default function ListAPetModal({
                     submitData.append(key, String(value));
                 }
             });
+
+            // Add shelter ID
+            if (session?.user?.id) {
+                submitData.append('shelterId', session.user.id);
+            }
 
             // Add images
             images.forEach((image) => {

@@ -10,7 +10,7 @@ const navLinks = [
     { name: 'Find a Pet', href: '/pets' },
     { name: 'How It Works', href: '/how-it-works' },
     { name: 'About', href: '/about' },
-    {name: 'Contact', href: '/contact'},
+    { name: 'Contact', href: '/contact' },
 ];
 
 export default function Navbar() {
@@ -117,7 +117,6 @@ export default function Navbar() {
                                 )}
                             </svg>
                         </button>
-                        <button onClick={()=> setUserMenuOpen(!userMenuOpen)}>
                             {
                                 !session ?
                                     <Link
@@ -126,7 +125,7 @@ export default function Navbar() {
                                     >
                                         Register
                                     </Link>
-                                    : <div className='flex gap-1 items-center cursor-pointer'>
+                                    : <button onClick={() => setUserMenuOpen(!userMenuOpen)} className='flex gap-1 items-center cursor-pointer'>
                                         <Image
                                             src={(session?.user as { profileImage?: string })?.profileImage as string}
                                             alt='icon'
@@ -134,9 +133,8 @@ export default function Navbar() {
                                             height={40}
                                             className='rounded-full'
                                         />
-                                    </div>
+                                    </button >
                             }
-                        </button>
                         <ThemeSwitch />
                     </div>
                 </div>
