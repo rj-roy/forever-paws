@@ -108,7 +108,7 @@ export default function AuthForm({ isLogin }: Props) {
                 };
             };
 
-        } catch (error) {
+        } catch {
             setErrors({ submit: 'Authentication failed. Please check your credentials.' });
         } finally {
             setIsLoading(false);

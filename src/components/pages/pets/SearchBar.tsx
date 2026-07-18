@@ -1,14 +1,12 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useTransition } from 'react';
 import { Search } from 'lucide-react';
 
 export default function SearchBar() {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const router = useRouter();
-    const [isPending, startTransition] = useTransition();
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -23,9 +21,7 @@ export default function SearchBar() {
         }
         params.set('page', '1');
 
-        startTransition(() => {
-            router.push(`${pathname}?${params.toString()}`);
-        });
+        router.push(`${pathname}?${params.toString()}`);
     };
 
     return (

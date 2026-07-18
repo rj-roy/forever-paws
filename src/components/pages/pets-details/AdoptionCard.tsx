@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { Eye, FileText, Calendar, CheckCircle } from 'lucide-react';
-import Link from 'next/link';
 import AdoptionModal from './apply/ApplyModal';
 
 interface AdoptionCardProps {
