@@ -7,8 +7,8 @@
 A full-stack pet adoption platform connecting adopters with shelters and rescue organizations.
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000?style=for-the-badge&logo=vercel)](https://forever-paws-nine.vercel.app/)
-[![Client Repo](https://img.shields.io/badge/Client-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/rj-roy/forever-paws)
-[![Server Repo](https://img.shields.io/badge/Server-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/rj-roy/forever-paws-server)
+
+[![Server Repo]](https://github.com/rj-roy/forever-paws-server)
 
 </div>
 

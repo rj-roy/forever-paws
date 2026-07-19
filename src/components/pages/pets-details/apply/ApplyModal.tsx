@@ -5,6 +5,7 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import AdoptionForm from './AdoptionForm';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import { authHeader } from '@/lib/core/JWT';
 
 interface AdoptionModalProps {
     isOpen: boolean;
@@ -113,11 +114,20 @@ export default function AdoptionModal({
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        const headers = new Headers();
+        const auth = await authHeader();
+
+        Object.entries(auth).forEach(([key, value]) => {
+            headers.append(key, value);
+        });
+
+
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/adoption/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    ...(await authHeader())
                 },
                 body: JSON.stringify({
                     petId,

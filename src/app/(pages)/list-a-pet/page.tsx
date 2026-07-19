@@ -1,10 +1,45 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ListAPetModal from '@/components/pages/listAPet/ListAPetModal';
+import { useSession } from '@/lib/auth-client';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import SkeletonCard from '@/components/ui/skeletons/PetsSkeleton';
 
 const ListAPet = () => {
+    const router = useRouter();
     const [isModalOpen, setIsModalOpen] = useState(true);
+    const { data: session, isPending } = useSession();
+
+    useEffect(() => {
+        if (isPending) return;
+
+        if (!session) {
+
+            toast.error("Please sign in to continue");
+            const timer = setTimeout(() => {
+                router.push('/auth?login=true');
+            }, 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [session, isPending, router]);
+
+    if (isPending) {
+        return (
+            <div className='min-h-[80dvh]'>
+                <SkeletonCard />
+            </div>
+        );
+    };
+
+    if (!session) {
+        return (
+            <div className='min-h-[80dvh]'>
+                <SkeletonCard />
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-[#FFF9F2] dark:bg-def-dark-bg px-4 py-10">

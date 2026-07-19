@@ -7,6 +7,7 @@ import PetCard from '@/components/pages/pets/PetCard';
 import Pagination from '@/components/pages/pets/Pagination';
 import EmptyState from '@/components/pages/pets/EmptyState';
 import SkeletonCard from '@/components/ui/skeletons/PetsSkeleton';
+import { authHeader } from '@/lib/core/JWT';
 
 export const metadata: Metadata = {
   title: 'Find Your Perfect Pet | Forever Paws',
@@ -28,12 +29,20 @@ async function getPets(searchParams: Record<string, string | string[] | undefine
       }
     }
   });
-  
+
+  const headers = new Headers();
+  const auth = await authHeader();
+
+  Object.entries(auth).forEach(([key, value]) => {
+    headers.append(key, value);
+  });
+
 
   const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/pets/get/query?${queryString.toString()}`;
-  
+
   const res = await fetch(apiUrl, {
     cache: 'no-store',
+    headers,
   });
 
   if (!res.ok) {
@@ -41,7 +50,7 @@ async function getPets(searchParams: Record<string, string | string[] | undefine
   }
 
   const pets: Pet[] = await res.json();
-  
+
   const totalCount = parseInt(res.headers.get('X-Total-Count') || '0', 10);
   const totalPages = parseInt(res.headers.get('X-Total-Pages') || '1', 10);
   const currentPage = parseInt(res.headers.get('X-Current-Page') || '1', 10);

@@ -40,6 +40,7 @@ export default async function ManagePetsPage({ searchParams }: ManagePetsPagePro
     const userId = session?.user?.id || '';
 
     const { pets, total } = await getPets(userId, currentPage);
+    console.log(pets);
 
     if (pets.length === 0) {
         return (
@@ -59,7 +60,7 @@ export default async function ManagePetsPage({ searchParams }: ManagePetsPagePro
                             <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
                                 Listing a pet is the first step toward finding them a loving family. Let&apos;s create their profile together.
                             </p>
-                            <Link href="/shelter/list-pet" className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg active:scale-95 mb-8">
+                            <Link href="/list-a-pet" className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg active:scale-95 mb-8">
                                 <Plus size={20} />
                                 List Your First Pet
                             </Link>
@@ -88,7 +89,7 @@ export default async function ManagePetsPage({ searchParams }: ManagePetsPagePro
                             Tracking {total} furry friends at your shelter
                         </p>
                     </div>
-                    <Link href="/pets/list-a-pet" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg active:scale-95">
+                    <Link href="/list-a-pet" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg active:scale-95">
                         <Plus size={20} />
                         List a New Pet
                     </Link>

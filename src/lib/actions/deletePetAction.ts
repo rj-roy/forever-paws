@@ -1,6 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { authHeader } from '../core/JWT';
 
 export async function deletePetAction(petId: string) {
   try {
@@ -8,6 +9,7 @@ export async function deletePetAction(petId: string) {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        ...(await authHeader()),
       },
     });
 

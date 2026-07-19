@@ -9,7 +9,7 @@ const footerLinks = {
         { name: 'Success Stories', href: '/stories' },
     ],
     shelter: [
-        { name: 'List a Pet', href: '/pets/list' },
+        { name: 'List a Pet', href: '/list-a-pet' },
         { name: 'Shelter Dashboard', href: '/dashboard/shelter' },
         { name: 'Manage Applications', href: '/dashboard/shelter/adoption-request' },
         { name: 'Resources', href: '/resources' },

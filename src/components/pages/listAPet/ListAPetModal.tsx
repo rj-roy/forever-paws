@@ -1,4 +1,3 @@
-// components/ListPetModal.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -6,6 +5,7 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useSession } from '@/lib/auth-client';
 import ListPetForm from './ListPetForm';
+import { authHeader } from '@/lib/core/JWT';
 
 interface ListPetModalProps {
     isOpen: boolean;
@@ -188,10 +188,18 @@ export default function ListAPetModal({
                 submitData.append('images', image);
             });
 
+            const headers = new Headers();
+            const auth = await authHeader();
+
+            Object.entries(auth).forEach(([key, value]) => {
+                headers.append(key, value);
+            });
+
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/pets/create`, {
                 method: 'POST',
                 credentials: 'include',
                 body: submitData,
+                headers,
             });
 
             if (!response.ok) {
@@ -279,8 +287,8 @@ export default function ListAPetModal({
                             {[1, 2, 3, 4, 5].map((step) => (
                                 <div key={step} className="flex items-center flex-1 last:flex-none">
                                     <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${step <= currentStep
-                                            ? 'bg-primary text-white shadow-lg'
-                                            : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
+                                        ? 'bg-primary text-white shadow-lg'
+                                        : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
                                         }`}>
                                         {step < currentStep ? '✓' : step}
                                     </div>
