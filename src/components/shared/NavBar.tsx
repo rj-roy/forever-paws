@@ -24,7 +24,7 @@ export default function Navbar() {
     const handleSignout = async () => {
         await authClient.signOut();
         setUserMenuOpen(false);
-        router.push('/auth?signin=true');
+        router.push('/auth?login=true');
     };
 
     useEffect(() => {
@@ -134,7 +134,7 @@ export default function Navbar() {
                                     </Link>
                                     : <button onClick={() => setUserMenuOpen(!userMenuOpen)} className='flex gap-1 items-center cursor-pointer'>
                                         <Image
-                                            src={(session?.user as { profileImage?: string })?.profileImage as string}
+                                            src={(session?.user as { profileImage?: string })?.profileImage as string || "https://res.cloudinary.com/dbkpia8ri/image/upload/v1781958996/images_rbgnle.png"}
                                             alt='icon'
                                             width={40}
                                             height={40}

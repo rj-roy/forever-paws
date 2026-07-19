@@ -78,6 +78,31 @@ export default function AuthForm({ isLogin }: Props) {
         return Object.keys(newErrors).length === 0;
     };
 
+    const handleDemoLogin = async () => {
+        setFormData({ email: 'demo@demo.com', password: 'demo@demo.com' });
+        setErrors({});
+        setIsLoading(true);
+
+        try {
+            const { data, error } = await authClient.signIn.email({
+                email: 'demo@demo.com',
+                password: 'demo@demo.com'
+            });
+
+            if (error) {
+                toast.error(error.message);
+                return;
+            } else if (data) {
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                router.push(targetRedirect);
+            }
+        } catch {
+            setErrors({ submit: 'Demo login failed. Please try again.' });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!validateForm()) {
@@ -259,6 +284,29 @@ export default function AuthForm({ isLogin }: Props) {
                         <div className="ml-3">
                             <h3 className="text-sm font-medium text-red-800 dark:text-red-300">{errors.submit}</h3>
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {isLogin && (
+                <button
+                    type="button"
+                    disabled={isLoading}
+                    onClick={handleDemoLogin}
+                    className="w-full bg-white dark:bg-stone-800 border-2 border-stone-900 dark:border-stone-300 text-stone-900 dark:text-white py-3 rounded-lg font-medium hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                    <PawPrint size={18} />
+                    Demo Login
+                </button>
+            )}
+
+            {isLogin && (
+                <div className="relative my-2">
+                    <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-stone-300 dark:border-stone-600"></div>
+                    </div>
+                    <div className="relative flex justify-center text-sm">
+                        <span className="px-2 bg-white dark:bg-stone-900 text-stone-500">or</span>
                     </div>
                 </div>
             )}
